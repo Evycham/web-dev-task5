@@ -26,30 +26,25 @@ btnClose.addEventListener("click", function() {
 
 form.addEventListener("submit", createTask);
 
-function createTask() {
-    const dateToday = new Date(Date.now());
+function createTask(e) {
+    e.preventDefault();
 
-    let name = titelInput.value;
-    let description = descriptionInput.value;
-    let date = new Date(dateInput.value);
+    const dateToday = new Date();
+
+    const name = titelInput.value;
+    const description = descriptionInput.value;
+    const date = new Date(dateInput.value);
 
     let day = date.getDay();
-    let month = date.getMonth();
-    let year = date.getFullYear();
 
-    if(dateToday.getFullYear() > year){
-        showError();
-        return;
-    } else if(dateToday.getFullYear() === year && dateToday.getMonth() > month){
-        showError();
-        return;
-    } else if(dateToday.getMonth() === month && dateToday.getDate() > day){
+    if(dateToday <= date){
         showError();
         return;
     }
 
     let task = new Task(name, description, date);
     tasksArray.push(task);
+    updateList();
 }
 
 class Task{
@@ -74,5 +69,9 @@ function updateList(){
 
 function showError(){
     errorMsg.classList.add("errorOn");
+}
+
+function hideError(){
+    errorMsg.classList.remove("errorOn");
 }
 
