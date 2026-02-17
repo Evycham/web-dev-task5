@@ -127,6 +127,11 @@ function clearInput(){
     hideError();
 }
 
+/**
+ * according to the event - looking for the element on which it was clicked, if btn "remove" -> delete
+ * El and also drop from the Array
+ * @param e - event
+ **/
 function removeTask(e){
     const btn = e.target.closest(".remove");
     if(!btn) return;
