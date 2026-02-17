@@ -39,9 +39,18 @@
 
     <template id="tasks--template">
         <li class="task--details">
-            <p class="task--title"></p>
-            <p class="task--description"></p>
-            <time class="task--deadline"></time>
+            <div class="title--container">
+                <h3>Name: </h3>
+                <p class="task--title"></p>
+            </div>
+            <div class="description--container">
+                <h3>Description: </h3>
+                <p class="task--description"></p>
+            </div>
+            <div class="date--container">
+                <h3>Deadline: </h3>
+                <time class="task--deadline"></time>
+            </div>
             <button class="remove">remove</button>
         </li>
     </template>

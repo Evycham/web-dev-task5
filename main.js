@@ -51,8 +51,13 @@ function createTask(e) {
         showError();
         return;
     }
+    let isImportant = false;
 
-    let task = new Task(name, description, date);
+    if(date - dateToday <= 2 * 24 * 60 * 60 * 1000){
+        isImportant = true;
+    }
+
+    let task = new Task(name, description, date, isImportant);
     tasksArray.push(task);
 
     task.addTask();
@@ -64,10 +69,11 @@ function createTask(e) {
  * class for a Task
  **/
 class Task{
-    constructor(_title, _description, _date) {
+    constructor(_title, _description, _date, _isImportant) {
         this.title = _title;
         this.description = _description;
         this.date = _date;
+        this.isImportant = _isImportant;
     }
 
     /**
@@ -78,12 +84,25 @@ class Task{
         const title = clone.querySelector(".task--title");
         const description = clone.querySelector(".task--description");
         const date = clone.querySelector(".task--deadline");
+        const fullEl = clone.querySelector(".task--details");
 
         title.textContent = this.title;
         description.textContent = this.description;
-        date.textContent = this.date;
+        date.textContent = this.dateToString();
+
+        if(this.isImportant){
+            fullEl.classList.add("isImportant");
+        }
 
         tasksList.appendChild(clone);
+    }
+
+    dateToString() {
+        let year = this.date.getFullYear();
+        let month = this.date.getMonth();
+        let day = this.date.getDate();
+
+        return `${year}-${month}-${day}`;
     }
 }
 

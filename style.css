@@ -5,3 +5,7 @@
 #error.error--On{
     display: block;
 }
+
+.isImportant{
+    background-color: #dfc212;
+}
