@@ -3,29 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>ToDo</title>
+    <link rel="stylesheet" href="style.css">
     <script src="main.js" defer></script>
 </head>
 <body>
     <main id="scene">
         <div id="tasks--create">
             <dialog id="dialog">
-                <div id="name">
-                    <label for="name--input">Task name</label>
-                    <input type="text" id="name--input">
-                </div>
-                <div id="description">
-                    <label for="description--input">Description</label>
-                    <textarea id="description--input"></textarea>
-                </div>
-                <div id="date">
-                    <label for="date--input">Date</label>
-                    <input type="date" id="date--input">
-                </div>
-                <button id="btnClose"></button>
-                <button id="btnCreate"></button>
+                <form id="form">
+                    <div id="name">
+                        <label for="titel--input">Task name</label>
+                        <input type="text" id="titel--input" required>
+                    </div>
+                    <div id="description">
+                        <label for="description--input">Description</label>
+                        <textarea id="description--input"></textarea>
+                    </div>
+                    <div id="date">
+                        <small id="error">Ungültige eingabe von Date</small>
+                        <label for="date--input">Date</label>
+                        <input type="date" id="date--input" required>
+                    </div>
+                    <button id="btnClose"></button>
+                    <button id="btnCreate" type="submit"></button>
+                </form>
             </dialog>
             <button id="btnOpen">New ToDo</button>
         </div>
+
         <div id="tasks">
             <h2>Our tasks</h2>
             <ul id="tasks--list"></ul>
