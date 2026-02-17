@@ -31,6 +31,8 @@ btnClose.addEventListener("click", function() {
 
 form.addEventListener("submit", createTask);
 
+tasksList.addEventListener("click", removeTask);
+
 /**
  * Main function for creating Tasks:
  *  gathering information from inputs fields and pre-check
@@ -46,18 +48,14 @@ function createTask(e) {
     const name = titelInput.value;
     const description = descriptionInput.value;
     const date = new Date(dateInput.value);
+    const createdAt = dateToday;
 
     if(dateToday > date){
         showError();
         return;
     }
-    let isImportant = false;
 
-    if(date - dateToday <= 2 * 24 * 60 * 60 * 1000){
-        isImportant = true;
-    }
-
-    let task = new Task(name, description, date, isImportant);
+    let task = new Task(name, description, date, createdAt);
     tasksArray.push(task);
 
     task.addTask();
@@ -69,11 +67,12 @@ function createTask(e) {
  * class for a Task
  **/
 class Task{
-    constructor(_title, _description, _date, _isImportant) {
+    constructor(_title, _description, _date, _createAt) {
         this.title = _title;
         this.description = _description;
         this.date = _date;
-        this.isImportant = _isImportant;
+        this.createdAt = _createAt;
+        this.id = crypto.randomUUID();
     }
 
     /**
@@ -86,11 +85,12 @@ class Task{
         const date = clone.querySelector(".task--deadline");
         const fullEl = clone.querySelector(".task--details");
 
+        fullEl.dataset.id = this.id;
         title.textContent = this.title;
         description.textContent = this.description;
         date.textContent = this.dateToString();
 
-        if(this.isImportant){
+        if(this.date - this.createdAt <= 2 * 24 * 60 * 60 * 1000){
             fullEl.classList.add("isImportant");
         }
 
@@ -99,10 +99,10 @@ class Task{
 
     dateToString() {
         let year = this.date.getFullYear();
-        let month = this.date.getMonth();
-        let day = this.date.getDate();
+        let month = ("" + this.date.getMonth() + 1).padStart(2, "0");
+        let day = ("" + this.date.getDate()).padStart(2, "0");
 
-        return `${year}-${month}-${day}`;
+        return day + "-" + month + "-" + year;
     }
 }
 
@@ -125,4 +125,21 @@ function clearInput(){
     descriptionInput.value = "";
     dateInput.value = "";
     hideError();
+}
+
+function removeTask(e){
+    const btn = e.target.closest(".remove");
+    if(!btn) return;
+
+    const dropTask = btn.closest(".task--details");
+    if(!dropTask) return;
+
+    const id = dropTask.dataset.id;
+    tasksArray.splice(tasksArray.findIndex(task => task.id === id), 1);
+
+    dropTask.remove();
+}
+
+function updateTasks(){
+
 }
