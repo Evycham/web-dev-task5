@@ -2,6 +2,6 @@
     display: none;
 }
 
-.error--On{
+#error.error--On{
     display: block;
 }

@@ -25,8 +25,8 @@ btnOpen.addEventListener("click", function() {
 });
 // Dialog-close
 btnClose.addEventListener("click", function() {
-    clearInput();
     dialog.close();
+    clearInput();
 });
 
 form.addEventListener("submit", createTask);
@@ -50,7 +50,8 @@ function createTask(e) {
     tasksArray.push(task);
 
     task.addTask();
-    hideError();
+    clearInput();
+    dialog.close();
 }
 
 class Task{
@@ -83,8 +84,8 @@ function hideError(){
 }
 
 function clearInput(){
-    titelInput.value = null;
-    descriptionInput.value = null;
-    dateInput.value = null;
-    dialog.close();
+    titelInput.value = "";
+    descriptionInput.value = "";
+    dateInput.value = "";
+    hideError();
 }
