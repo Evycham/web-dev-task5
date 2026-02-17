@@ -24,8 +24,8 @@
                         <label for="date--input">Date</label>
                         <input type="date" id="date--input" required>
                     </div>
-                    <button id="btnClose" type="button"></button>
-                    <button id="btnCreate" type="submit"></button>
+                    <button id="btnClose" type="button">Close</button>
+                    <button id="btnCreate" type="submit">Submit</button>
                 </form>
             </dialog>
             <button id="btnOpen">New ToDo</button>
@@ -37,11 +37,12 @@
         </div>
     </main>
 
-    <template id="tasks--task">
+    <template id="tasks--template">
         <li class="task--details">
-            <p class="task--name"></p>
+            <p class="task--title"></p>
             <p class="task--description"></p>
             <time class="task--deadline"></time>
+            <button class="remove">remove</button>
         </li>
     </template>
 </body>
