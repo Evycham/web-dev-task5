@@ -31,6 +31,12 @@ btnClose.addEventListener("click", function() {
 
 form.addEventListener("submit", createTask);
 
+/**
+ * Main function for creating Tasks:
+ *  gathering information from inputs fields and pre-check
+ *
+ * @param e turn off standard acting
+ **/
 function createTask(e) {
     e.preventDefault();
 
@@ -54,6 +60,9 @@ function createTask(e) {
     dialog.close();
 }
 
+/**
+ * class for a Task
+ **/
 class Task{
     constructor(_title, _description, _date) {
         this.title = _title;
@@ -61,6 +70,9 @@ class Task{
         this.date = _date;
     }
 
+    /**
+     * method for adding the task to the HTML "part"
+     **/
     addTask() {
         const clone = template.content.cloneNode(true);
         const title = clone.querySelector(".task--title");
@@ -75,6 +87,9 @@ class Task{
     }
 }
 
+/**
+* two methods for the date-error
+**/
 function showError(){
     errorMsg.classList.add("error--On");
 }
@@ -83,6 +98,9 @@ function hideError(){
     errorMsg.classList.remove("error--On");
 }
 
+/**
+ * input fields clearing
+ **/
 function clearInput(){
     titelInput.value = "";
     descriptionInput.value = "";
