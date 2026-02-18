@@ -18,6 +18,8 @@ const template = document.getElementById("tasks--template");
 
 let tasksArray = [];
 
+let dateToday;
+
 // Dialog-open
 btnOpen.addEventListener("click", function() {
     clearInput();
@@ -29,36 +31,34 @@ btnClose.addEventListener("click", function() {
     clearInput();
 });
 
-form.addEventListener("submit", createTask);
+form.addEventListener("submit", function(e){
+    e.preventDefault();
+    createTask();
+    showTasks();
+});
 
 tasksList.addEventListener("click", removeTask);
 
 /**
  * Main function for creating Tasks:
  *  gathering information from inputs fields and pre-check
- *
- * @param e turn off standard acting
  **/
-function createTask(e) {
-    e.preventDefault();
-
-    const dateToday = new Date();
+function createTask() {
+    dateToday = new Date();
     dateToday.setHours(0, 0, 0, 0);
 
     const name = titelInput.value;
     const description = descriptionInput.value;
     const date = new Date(dateInput.value);
-    const createdAt = dateToday;
 
     if(dateToday > date){
         showError();
         return;
     }
 
-    let task = new Task(name, description, date, createdAt);
+    let task = new Task(name, description, date);
     tasksArray.push(task);
 
-    task.addTask();
     clearInput();
     dialog.close();
 }
@@ -67,11 +67,10 @@ function createTask(e) {
  * class for a Task
  **/
 class Task{
-    constructor(_title, _description, _date, _createAt) {
+    constructor(_title, _description, _date) {
         this.title = _title;
         this.description = _description;
         this.date = _date;
-        this.createdAt = _createAt;
         this.id = crypto.randomUUID();
     }
 
@@ -90,7 +89,7 @@ class Task{
         description.textContent = this.description;
         date.textContent = this.dateToString();
 
-        if(this.date - this.createdAt <= 2 * 24 * 60 * 60 * 1000){
+        if(this.date - dateToday <= 2 * 24 * 60 * 60 * 1000){
             fullEl.classList.add("isImportant");
         }
 
@@ -140,11 +139,27 @@ function removeTask(e){
     if(!dropTask) return;
 
     const id = dropTask.dataset.id;
-    tasksArray.splice(tasksArray.findIndex(task => task.id === id), 1);
+    const ix = tasksArray.findIndex(task => task.id === id);
+    if(ix === -1) return;
 
-    dropTask.remove();
+    tasksArray.splice(ix, 1);
+    showTasks();
 }
 
-function updateTasks(){
+function showTasks(){
+    dateToday = new Date();
+    dateToday.setHours(0, 0, 0, 0);
 
+    const allTasks = Array.from(tasksList.getElementsByClassName("task--details"));
+    allTasks.forEach(task => {
+        task.remove();
+    });
+
+    tasksArray = tasksArray.filter(task => {
+        let dif = task.date - dateToday;
+        return dif >= 0;
+    });
+    tasksArray.forEach(task => {
+        task.addTask();
+    })
 }
