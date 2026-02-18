@@ -24,7 +24,6 @@ body main#scene{
 body main div#tasks--create{
     display: flex;
     flex-direction: column;
-    gap: 50px;
 }
 
 body main div#tasks--create button#btnOpen{
@@ -38,12 +37,122 @@ body main div#tasks--create button#btnOpen{
     color: #F7D794;
 }
 
-dialog::backdrop{
+body main div#tasks--create dialog#dialog{
+    border-radius: 10px;
+    padding: 30px;
+    margin: auto;
+    position: fixed;
+}
+
+body main div#tasks--create dialog#dialog::backdrop{
     background-color: #EDA6A3;
     opacity: 0.4;
 }
 
-body main div#tasks--create button#btnClose{}
+body main div#tasks--create dialog#dialog form#form{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    text-align: left;
+}
+
+body main div#tasks--create dialog#dialog form#form button#btnClose,
+body main div#tasks--create dialog#dialog form#form button#btnCreate{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    border: none;
+    background: #192A56;
+    padding: 5px 15px;
+    border-radius: 20px;
+    color: #F7D794;
+}
+
+#name,
+#description,
+#date{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+#name label,
+#description label,
+#date label{
+    flex: 1;
+}
+
+#titel--input,
+#description--input,
+#date--input{
+    flex: 0 0 auto;
+    padding: 5px;
+}
+
+#description--input{
+    overflow-y: auto;
+    resize: none;
+}
+
+#tasks{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+#tasks--list{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    text-align: left;
+    overflow-y: auto;
+    list-style: none;
+    /*max-height: 500px;*/
+}
+
+.task--details{
+    display: flex;
+    flex-direction: column;
+    background: #9cd48f;
+    color: #3b4938;
+    padding: 20px;
+    border-radius: 10px;
+    gap: 20px;
+    border: 2px solid #3e4d3b;
+    max-width: 300px;
+    height: auto;
+}
+
+.title--container,
+.date--container{
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    gap: 25px;
+}
+
+.remove{
+    background: #05d4fe;
+    color: #000000;
+    font-weight: 800;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.remove:hover{
+    background: #ff2056;
+    color: #fff;
+    font-weight: 800;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
 
 #error{
     display: none;

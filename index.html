@@ -12,26 +12,26 @@
             <button id="btnOpen">New ToDo</button>
             <dialog id="dialog">
                 <form id="form">
+                    <button id="btnClose" type="button">Close</button>
                     <div id="name">
-                        <label for="titel--input">Task name</label>
+                        <label for="titel--input">Task name:</label>
                         <input type="text" id="titel--input" required>
                     </div>
                     <div id="description">
-                        <label for="description--input">Description</label>
+                        <label for="description--input">Description:</label>
                         <textarea id="description--input"></textarea>
                     </div>
+                    <small id="error">Ungültige eingabe von Date</small>
                     <div id="date">
-                        <small id="error">Ungültige eingabe von Date</small>
-                        <label for="date--input">Date</label>
+                        <label for="date--input">Date:</label>
                         <input type="date" id="date--input" required>
                     </div>
-                    <button id="btnClose" type="button">Close</button>
-                    <button id="btnCreate" type="submit">Submit</button>
+                    <button id="btnCreate" type="submit">Submit:</button>
                 </form>
             </dialog>
         </div>
         <div id="tasks">
-            <h2>Our tasks</h2>
+            <h2>Our tasks:</h2>
             <ul id="tasks--list"></ul>
         </div>
     </main>
