@@ -95,7 +95,7 @@ class Task{
         description.textContent = this.description;
         date.textContent = this.dateToString();
 
-        if(this.date - dateToday <= 2 * 24 * 60 * 60 * 1000){
+        if(this.date - dateToday < 3 * 24 * 60 * 60 * 1000){
             fullEl.classList.add("isImportant");
         }
 

@@ -109,7 +109,7 @@ body main div#tasks--create dialog#dialog form#form button#btnCreate{
     text-align: left;
     overflow-y: auto;
     list-style: none;
-    /*max-height: 500px;*/
+    max-height: 630px;
 }
 
 .task--details{
@@ -121,7 +121,7 @@ body main div#tasks--create dialog#dialog form#form button#btnCreate{
     border-radius: 10px;
     gap: 20px;
     border: 2px solid #3e4d3b;
-    max-width: 300px;
+    width: 500px;
     height: auto;
 }
 
@@ -131,6 +131,32 @@ body main div#tasks--create dialog#dialog form#form button#btnCreate{
     text-align: center;
     flex-direction: row;
     gap: 25px;
+}
+
+.task--title{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.description--container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.task--description{
+    height: 200px;
+    overflow-wrap: anywhere;
+    overflow-y: auto;
+}
+
+.task--title,
+.task--description,
+.task--deadline{
+    background: #dbfcd4;
+    padding: 5px;
+    border-radius: 10px;
 }
 
 .remove{
@@ -153,15 +179,19 @@ body main div#tasks--create dialog#dialog form#form button#btnCreate{
     cursor: pointer;
 }
 
-
 #error{
     display: none;
 }
 
 #error.error--On{
     display: block;
+    background: #fe003c;
+    color: #ffffff;
+    padding: 5px;
+    border-radius: 10px;
 }
 
 .isImportant{
     background-color: #dfc212;
+    border: 2px solid rgba(255, 0, 0, 0.91);
 }
