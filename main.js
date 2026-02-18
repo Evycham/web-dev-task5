@@ -169,6 +169,7 @@ function showTasks(){
     tasksArray.forEach(task => {
         task.addTask();
     })
+    saveTasks();
 }
 
 function saveTasks(){
@@ -182,8 +183,7 @@ function loadTasks(){
         tasks.forEach(task => {
             let newTask = new Task(task.title, task.description, new Date(task.date));
             newTask.id = task.id;
+            tasksArray.push(newTask);
         });
-
-        tasksArray = tasks;
     }
 }
