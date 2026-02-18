@@ -39,6 +39,11 @@ form.addEventListener("submit", function(e){
 
 tasksList.addEventListener("click", removeTask);
 
+window.addEventListener("load", function (){
+    loadTasks();
+    showTasks();
+});
+
 /**
  * Main function for creating Tasks:
  *  gathering information from inputs fields and pre-check
@@ -59,6 +64,7 @@ function createTask() {
     let task = new Task(name, description, date);
     tasksArray.push(task);
 
+    saveTasks();
     clearInput();
     dialog.close();
 }
@@ -143,6 +149,7 @@ function removeTask(e){
     if(ix === -1) return;
 
     tasksArray.splice(ix, 1);
+    saveTasks();
     showTasks();
 }
 
@@ -162,4 +169,21 @@ function showTasks(){
     tasksArray.forEach(task => {
         task.addTask();
     })
+}
+
+function saveTasks(){
+    localStorage.setItem("tasks", JSON.stringify(tasksArray));
+}
+
+function loadTasks(){
+    let obj = localStorage.getItem("tasks");
+    if(obj){
+        const tasks = JSON.parse(obj);
+        tasks.forEach(task => {
+            let newTask = new Task(task.title, task.description, new Date(task.date));
+            newTask.id = task.id;
+        });
+
+        tasksArray = tasks;
+    }
 }
